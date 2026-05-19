@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+// ✅ IMPORTING THE NEW COMPONENT
+import ThreatDashboard from './ThreatDashboard';
+import AiAnalyticsDashboard from './AiAnalyticsDashboard';
 
 function App() {
   const [currentView, setCurrentView] = useState('LOGIN');
@@ -69,7 +72,7 @@ function App() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: colors.bg, fontFamily: 'sans-serif' }}>
         <div style={{ background: colors.card, padding: '50px', borderRadius: '16px', border: `1px solid ${colors.accent}`, textAlign: 'center', boxShadow: '0 0 20px rgba(56, 189, 248, 0.2)' }}>
-          <h1 style={{ color: colors.text, marginBottom: '10px' }}>🛡️ Sentinel-X</h1>
+          <h1 style={{ color: colors.text, marginBottom: '10px' }}>🛡️ Guardian-X</h1>
           <p style={{ color: '#94a3b8', marginBottom: '30px' }}>Deception Technology Core</p>
           <form onSubmit={handleLogin}>
             <input type="password" placeholder="System Key" value={password} onChange={(e) => setPassword(e.target.value)}
@@ -114,7 +117,7 @@ function App() {
     <div style={{ background: colors.bg, minHeight: '100vh', color: colors.text, fontFamily: 'Inter, sans-serif', padding: '40px' }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px', alignItems: 'center' }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: '28px' }}>Sentinel-X Command Center</h1>
+          <h1 style={{ margin: 0, fontSize: '28px' }}>Guardian-X Command Center</h1>
           <p style={{ color: colors.accent, margin: 0, fontSize: '14px', letterSpacing: '1px' }}>ACTIVE DECEPTION LAYER</p>
         </div>
         <button onClick={() => setCurrentView('LOGIN')} style={{ padding: '10px 20px', borderRadius: '8px', background: colors.card, border: '1px solid #334155', color: colors.text, cursor: 'pointer' }}>Logout</button>
@@ -132,7 +135,8 @@ function App() {
         </form>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '30px' }}>
+      {/* TOP SECTION: Traps and Basic Logs */}
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '30px', marginBottom: '40px' }}>
         {/* TRAPS COLUMN */}
         <section>
           <h2 style={{ fontSize: '18px', marginBottom: '20px' }}>🛰️ Deployed Traps</h2>
@@ -157,7 +161,7 @@ function App() {
           ))}
         </section>
 
-        {/* ALERTS COLUMN */}
+        {/* ALERTS COLUMN (Compact) */}
         <section>
           <h2 style={{ fontSize: '18px', marginBottom: '20px' }}>⚠️ Intrusion Logs</h2>
           <div style={{ background: colors.card, borderRadius: '12px', overflow: 'hidden', border: '1px solid #334155' }}>
@@ -173,6 +177,13 @@ function App() {
           </div>
         </section>
       </div>
+
+      {/* ✅ BOTTOM SECTION: NEW GEO-IP THREAT DASHBOARD */}
+      <section style={{ borderTop: '1px solid #334155', paddingTop: '40px' }}>
+        <ThreatDashboard />
+        <AiAnalyticsDashboard />
+      </section>
+
     </div>
   );
 }

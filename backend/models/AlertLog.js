@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
 
-const AlertLogSchema = new mongoose.Schema({
-    tokenId: { type: String, required: true },
-    attackerIp: { type: String, required: true },
-    userAgent: { type: String, required: true },
-    triggerTime: { type: Date, default: Date.now }
+const alertLogSchema = new mongoose.Schema({
+  trapId: String,
+  ipAddress: String,
+  userAgent: String,
+  timestamp: { type: Date, default: Date.now },
+  // 👇 ADD THIS NEW SECTION 👇
+  location: {
+    city: { type: String, default: "Unknown" },
+    country: { type: String, default: "Unknown" },
+    isp: { type: String, default: "Unknown" },
+    lat: { type: Number },
+    lon: { type: Number }
+  }
 });
 
-module.exports = mongoose.model('AlertLog', AlertLogSchema);
+module.exports = mongoose.model('AlertLog', alertLogSchema);
